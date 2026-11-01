@@ -1,0 +1,202 @@
+/* Shared surfaces and accents keep both appearances consistent across the library and chat. */
+:root {
+  color-scheme: light;
+  --canvas: #eff0f3;
+  --surface: #fafafd;
+  --surface-soft: #f3f3f8;
+  --text: #303244;
+  --muted-text: #6b6e83;
+  --quiet-text: #777a8f;
+  --border: #dfe0e9;
+  --border-strong: #cac9dc;
+  --accent: #7764ad;
+  --accent-hover: #665397;
+  --accent-text: #74619f;
+  --accent-soft: #e8e3f3;
+  --accent-faint: #f0edf7;
+  --on-accent: #ffffff;
+  --orange: #d9a47d;
+  --orange-text: #a5714b;
+  --orange-soft: #f1e4da;
+  --orange-line: #e0c8b6;
+  --cover-purple: #e3deee;
+  --cover-orange: #ede0d5;
+  --cover-blue: #dde3f1;
+  --collection: #e2dcef;
+  --collection-text: #594a7f;
+  --collection-muted: #76658f;
+  --collection-line: #cfc5e2;
+  --error-bg: #faf0eb;
+  --error-line: #e6c6b8;
+  --error-text: #a1654d;
+  --shadow: 0 8px 30px #3028430d;
+  --ink: var(--text);
+  --muted: var(--muted-text);
+  --line: var(--border);
+  --green: var(--accent);
+  --green-hover: var(--accent-hover);
+  color: var(--text);
+  background: var(--canvas);
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0c1020;
+  --surface: #13192b;
+  --surface-soft: #181e33;
+  --text: #e2e4f1;
+  --muted-text: #a5abc1;
+  --quiet-text: #949cb7;
+  --border: #282f48;
+  --border-strong: #3b4262;
+  --accent: #ad9bdb;
+  --accent-hover: #c0afe9;
+  --accent-text: #b5a4df;
+  --accent-soft: #2b2744;
+  --accent-faint: #1d2038;
+  --on-accent: #191627;
+  --orange: #e3ad85;
+  --orange-text: #d9ad8d;
+  --orange-soft: #362b2c;
+  --orange-line: #56403b;
+  --cover-purple: #29273f;
+  --cover-orange: #332b32;
+  --cover-blue: #252d44;
+  --collection: #25223d;
+  --collection-text: #d7cbef;
+  --collection-muted: #b0a2cd;
+  --collection-line: #49405f;
+  --error-bg: #34242a;
+  --error-line: #614049;
+  --error-text: #e1aa9c;
+  --shadow: 0 8px 30px #00000026;
+}
+html, body, .folio-app { color: var(--text); background: var(--canvas); }
+::selection { color: var(--text); background: var(--accent-soft); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline-color: var(--accent); }
+.folio-topbar { background: var(--surface); border-color: var(--border); }
+.brand-symbol { color: var(--accent); }
+.folio-brand { color: var(--text); }
+.workspace-name { color: var(--muted-text); border-color: var(--border); }
+.workspace-tabs > button { color: var(--muted-text); }
+.workspace-tabs > button.current, .workspace-tabs > button:hover { color: var(--accent-text); }
+.workspace-tabs > button.current::after { background: var(--accent); }
+.tab-count { background: var(--accent-soft); color: var(--accent-text); }
+.account-status { color: var(--muted-text); }
+.profile-avatar { background: var(--orange-soft); color: var(--orange-text); border-color: var(--surface); }
+.connection-dot { background: var(--quiet-text); }
+.connection-dot.online, .context-dot, .ready-dot { background: var(--orange); box-shadow: none; }
+.connection-dot.offline { background: var(--error-text); }
+.theme-switch { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 33px; padding: 6px 10px; margin-left: 14px; border: 1px solid var(--border); background: var(--surface-soft); color: var(--accent-text); font-size: 11px; border-radius: 7px; white-space: nowrap; }
+.theme-switch svg { height: 15px; width: 15px; }
+.theme-switch:hover { background: var(--accent-soft); border-color: var(--border-strong); }
+.library-main, .conversation, .evidence-list { scrollbar-color: var(--border-strong) transparent; }
+.library-breadcrumb, .library-page-header p, .documents-section-heading > span, .field-hint, .library-page-footer, .local-import summary, .metadata-notice { color: var(--muted-text); }
+.library-page-header h1 { color: var(--text); }
+.library-page-header h1 > span { color: var(--accent-text); background: var(--accent-soft); }
+.attach-button { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.attach-button:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.attachment-status { background: var(--surface); border-color: var(--border-strong); color: var(--accent-text); box-shadow: var(--shadow); }
+.attachment-status.error, .load-error { background: var(--error-bg); border-color: var(--error-line); color: var(--error-text); }
+.library-overview { background: var(--collection); color: var(--collection-text); border: 1px solid var(--collection-line); }
+.collection-icon { color: var(--collection-text); background: transparent; border-color: var(--collection-line); }
+.collection-identity p { color: var(--collection-muted); }
+.ask-library-button { color: var(--collection-text); background: transparent; border-color: var(--collection-line); }
+.ask-library-button:hover { background: var(--accent-soft); }
+.document-search, .type-filter select { background: var(--surface); border-color: var(--border); color: var(--muted-text); }
+.document-search input { color: var(--text); }
+.document-search input::placeholder, .document-search button { color: var(--quiet-text); }
+.document-search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-faint); }
+.layout-switch { background: var(--surface-soft); border-color: var(--border); }
+.layout-switch button { color: var(--quiet-text); }
+.layout-switch button[aria-pressed="true"] { background: var(--surface); color: var(--accent-text); box-shadow: none; }
+.documents-section-heading h2 { color: var(--text); }
+.document-cover { background: var(--surface); border-color: var(--border); }
+.document-cover:hover { border-color: var(--accent); }
+.cover-art { background: var(--cover-orange); color: var(--orange-text); border-color: var(--orange-line); }
+.cover-art::before { background: var(--orange-line); }
+.cover-type, .cover-seal { border-color: currentColor; }
+.type-md .cover-art { background: var(--cover-purple); color: var(--accent-text); border-color: var(--border-strong); }
+.type-md .cover-art::before { background: var(--border-strong); }
+.type-pdf .cover-art { background: var(--cover-blue); color: var(--accent-text); border-color: var(--border-strong); }
+.document-title { color: var(--text); }
+.document-type { color: var(--muted-text); }
+.document-open { color: var(--accent-text); border-color: var(--border); }
+.document-cover:hover .document-open { color: var(--accent-text); background: var(--accent-faint); }
+.add-document-tile { background: var(--surface-soft); border-color: var(--border-strong); }
+.add-document-tile > svg, .add-document-tile h3 { color: var(--orange-text); }
+.add-document-tile > p { color: var(--muted-text); }
+.add-document-tile .attach-button { background: var(--surface); color: var(--accent-text); border-color: var(--border-strong); }
+.add-document-tile .attach-button:hover { background: var(--accent-soft); color: var(--accent-text); }
+.library-workflows, .local-import, .library-workflows button:first-of-type { border-color: var(--border); }
+.library-workflows h2 { color: var(--text); }
+.library-workflows p, .library-workflows small { color: var(--muted-text); }
+.library-workflows button { color: var(--accent-text); }
+.library-workflows button:hover { color: var(--orange-text); }
+.local-import label { color: var(--muted-text); }
+.local-import input { background: var(--surface); color: var(--text); border-color: var(--border-strong); }
+.local-import form button { color: var(--accent-text); background: var(--accent-soft); border-color: var(--border-strong); }
+.import-status, .library-loading, .no-documents { color: var(--muted-text); }
+.import-status.error { color: var(--error-text); }
+.no-documents p { color: var(--muted-text); }
+.load-error button, .no-documents button { color: var(--accent-text); }
+.conversation-dock, .conversation-view .conversation-dock, .folio-body:not(.conversation-view) .conversation-dock { background: var(--surface); border-color: var(--border); }
+.conversation-title { background: var(--surface-soft); border-color: var(--border); }
+.conversation-title-icon { color: var(--accent-text); background: var(--accent-soft); border-color: var(--border-strong); }
+.conversation-title h2, .chat-start h3, .message-author { color: var(--text); }
+.conversation-title p, .conversation-tools, .conversation-tools button, .conversation-footer, .chat-start > p, .question-list button, .citation-example p { color: var(--muted-text); }
+.conversation-tools { border-color: var(--border); }
+.conversation-tools button.selected, .conversation-tools button:hover { color: var(--accent-text); }
+.icon-button { color: var(--quiet-text); }
+.icon-button:hover { background: var(--accent-soft); color: var(--accent-text); }
+.chat-start-mark { color: var(--orange-text); background: var(--orange-soft); border-color: var(--orange-line); }
+.question-list button { border-color: var(--border); }
+.question-list button:hover { color: var(--accent-text); }
+.citation-example > span, .citation-link { background: var(--accent-faint); border-color: var(--border-strong); color: var(--accent-text); }
+.composer-area { background: var(--surface); }
+.composer { background: var(--surface-soft); border-color: var(--border-strong); box-shadow: none; }
+.composer:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-faint); }
+.composer textarea { color: var(--text); }
+.composer textarea::placeholder { color: var(--quiet-text); }
+.compact .attach-button { color: var(--muted-text); background: transparent; border-color: transparent; }
+.compact .attach-button:hover { color: var(--accent-text); }
+.composer-scope { color: var(--accent-text); background: var(--accent-faint); }
+.send-button { color: var(--on-accent); background: var(--accent); }
+.send-button:disabled { color: var(--quiet-text); background: var(--border); }
+.evidence-heading h3, .plain-button { color: var(--accent-text); }
+.source-card { background: var(--surface); border-color: var(--border); }
+.source-id { background: var(--orange-soft); color: var(--orange-text); }
+.source-name, .source-content p { color: var(--text); }
+.source-name small, .expand, .source-excerpt-label { color: var(--muted-text); }
+.source-content { border-color: var(--border); }
+.source-selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-faint); }
+.evidence-empty, .evidence-empty p { color: var(--muted-text); }
+.evidence-empty h3 { color: var(--text); }
+.message-avatar { background: var(--accent-soft); color: var(--accent-text); }
+.user .message-avatar { background: var(--orange-soft); color: var(--orange-text); }
+.answer-tag { color: var(--quiet-text); }
+.user .message-body { background: var(--surface-soft); }
+.answer-text { color: var(--text); }
+.answer-text strong { color: var(--accent-text); }
+.citation-link:hover { background: var(--accent-soft); }
+.answer-sources { background: var(--surface-soft); border-color: var(--border); color: var(--accent-text); }
+.thinking strong { color: var(--accent-text); }
+.thinking div > span { color: var(--muted-text); }
+.spinner { border-color: var(--border-strong); border-top-color: var(--accent); }
+.chat-error { background: var(--error-bg); border-color: var(--error-line); color: var(--error-text); }
+.open-conversation { color: var(--on-accent); background: var(--accent); border-color: var(--accent); box-shadow: var(--shadow); }
+.open-conversation:hover { background: var(--accent-hover); }
+.skip-link { background: var(--accent); color: var(--on-accent); }
+.mobile-chat-backdrop { background: #080b1859; }
+@media (max-width: 1000px) { .folio-body:not(.conversation-view) .conversation-dock { box-shadow: var(--shadow); } }
+@media (max-width: 700px) {
+  .theme-switch { margin-left: 0; width: 31px; min-height: 31px; padding: 6px; }
+  .theme-switch > span { display: none; }
+  .folio-topbar { gap: 12px; }
+  .workspace-tabs { gap: 13px; }
+  .account-status { gap: 8px; }
+}
+@media (max-width: 420px) {
+  .account-status .profile-avatar { display: none; }
+  .folio-topbar { padding-inline: 13px; }
+  .folio-brand { font-size: 23px; }
+}

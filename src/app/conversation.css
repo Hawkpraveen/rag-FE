@@ -1,0 +1,104 @@
+/* Conversation workspace: persistent history rail and a compact working area. */
+.folio-topbar { height: 64px; padding-inline: 28px; gap: 22px; }
+.brand-symbol { width: 27px; height: 27px; }
+.conversation-title { min-height: 64px; padding: 12px 18px; }
+.conversation-title-icon { width: 30px; height: 30px; border-radius: 8px; }
+.conversation-title-icon svg { width: 16px; height: 16px; }
+.conversation-title p { font-size: 11px; margin-top: 2px; }
+.conversation-action { min-height: 30px; padding: 5px 9px; font-size: 11px; }
+.conversation-history { flex: none; gap: 10px; padding: 10px 18px; border-color: var(--border); background: var(--surface); color: var(--muted-text); font-size: 11px; }
+.conversation-history label { white-space: nowrap; }
+.conversation-history select { flex: 0 1 320px; height: 32px; padding: 5px 28px 5px 10px; border-color: var(--border-strong); background: var(--surface-soft); color: var(--text); font-size: 12px; }
+.conversation-history option { background: var(--surface); color: var(--text); }
+.conversation-history .plain-button { margin-left: auto; }
+.plain-button { min-height: 30px; padding: 5px 8px; border-radius: 5px; }
+.plain-button:hover:not(:disabled) { background: var(--accent-soft); }
+.history-error { display: flex; align-items: flex-start; flex: none; gap: 10px; padding: 10px 18px; border-block: 1px solid var(--error-line); background: var(--error-bg); color: var(--error-text); font-size: 11px; line-height: 1.5; }
+.history-error > svg { flex: none; width: 15px; height: 15px; margin-top: 2px; }
+.history-error > div { min-width: 0; }
+.history-error strong { display: block; font-size: 12px; font-weight: 600; }
+.history-error span { display: block; overflow-wrap: anywhere; }
+.history-error .plain-button { flex: none; margin-left: auto; color: inherit; border: 1px solid var(--error-line); }
+.history-loading { flex: none; margin: 0; padding: 9px 18px; color: var(--muted-text); font-size: 12px; }
+
+.conversation-layout { display: flex; flex: 1; min-height: 0; min-width: 0; }
+.conversation-stage { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; }
+.chat-history-rail { width: 204px; flex: none; padding: 18px 12px; border-right: 1px solid var(--border); background: var(--surface-soft); }
+.chat-history-rail .conversation-history { flex-direction: column; align-items: stretch; gap: 10px; padding: 0; border: 0; background: transparent; }
+.chat-history-rail .conversation-history label { font-size: 12px; font-weight: 600; color: var(--text); }
+.chat-history-rail .conversation-history select { flex: none; width: 100%; height: 34px; font-size: 11px; }
+.chat-history-rail .conversation-history .plain-button { margin: 0; align-self: flex-start; font-size: 11px; padding-left: 0; }
+.history-caption { margin: 18px 0 0; font-size: 11px; line-height: 1.65; color: var(--quiet-text); max-width: 26ch; }
+.conversation-view .conversation-dock { width: 100%; margin: 0; border: 0; border-radius: 0; flex: 1; background: var(--canvas); }
+.conversation-view .conversation-stage { background: var(--canvas); }
+.conversation-view .conversation-title { min-height: 52px; padding: 9px 24px; background: var(--canvas); }
+.conversation-title-icon { display: none; }
+.conversation-title h2 { font-size: 14px; letter-spacing: -.2px; }
+.conversation-title p { font-size: 10px; }
+.conversation-action { min-height: 28px; font-size: 11px; padding: 4px 8px; }
+.conversation-view .conversation-content { width: 100%; max-width: none; margin: 0; }
+.conversation-view .chat-panel { width: 100%; min-width: 0; }
+.conversation-view .conversation { padding: 22px max(28px, calc((100% - 880px) / 2)); }
+.conversation-view .is-empty { overflow-y: auto; display: block; }
+.conversation-view .is-empty .conversation { display: block; flex: none; overflow: visible; padding-top: 36px; padding-bottom: 0; }
+.conversation-view .chat-start { max-width: none; width: 100%; margin: 0; padding: 0; }
+.conversation-view .chat-start h3 { font-size: 20px; letter-spacing: -.5px; margin: 0 0 6px; line-height: 1.4; }
+.chat-start > p { font-size: 12px; line-height: 1.6; }
+.conversation-view .question-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 18px; }
+.conversation-view .question-list button { display: grid; grid-template-columns: 16px 1fr; align-content: start; align-items: start; min-height: 66px; gap: 8px; padding: 12px 10px; border-radius: 6px; }
+.question-list strong { font-size: 11px; }
+.question-list small { font-size: 10px; line-height: 1.5; margin-top: 3px; }
+.conversation-view .question-list button > svg:first-child { width: 15px; height: 15px; margin-top: 2px; }
+.conversation-view .question-list button > svg:last-child { display: none; }
+.question-list button:disabled { opacity: .7; }
+.conversation-view .composer-area { background: transparent; padding: 12px max(28px, calc((100% - 880px) / 2)) 0; }
+.conversation-view .is-empty .composer-area { padding-top: 16px; }
+.conversation-view .composer, .composer { padding: 12px 14px 10px; border-radius: 8px; background: var(--surface); }
+.conversation-view .composer textarea, .composer textarea { font-size: 12px; line-height: 1.6; min-height: 38px; height: 38px; max-height: 120px; }
+.composer-bottom { margin-top: 5px; gap: 6px; flex-wrap: wrap; }
+.composer-scope { font-size: 10px; }
+.compact .attach-button { font-size: 11px; min-height: 27px; }
+.send-button { height: 28px; width: 28px; }
+.conversation-view .enter-hint { font-size: 10px; }
+.conversation-view .is-empty .composer-note { display: flex; align-items: center; gap: 5px; margin: 8px 0 0; color: var(--quiet-text); font-size: 10px; }
+.composer-note svg { width: 11px; height: 11px; }
+.conversation-footer { padding: 8px 16px; font-size: 10px; }
+.conversation-view .conversation-footer { display: none; }
+.folio-body:not(.conversation-view) .chat-history-rail { width: auto; padding: 0; border: 0; }
+.folio-body:not(.conversation-view) .conversation-layout { flex-direction: column; }
+.folio-body:not(.conversation-view) .chat-history-rail .conversation-history { flex-direction: row; align-items: center; padding: 9px 14px; border-bottom: 1px solid var(--border); }
+.folio-body:not(.conversation-view) .chat-history-rail select { flex: 1; width: 0; }
+.folio-body:not(.conversation-view) .history-caption { display: none; }
+@media (max-width: 1100px) {
+  .chat-history-rail { width: 180px; }
+  .conversation-view .question-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .conversation-view .question-list button { min-height: 56px; }
+}
+@media (max-width: 700px) {
+  .folio-topbar { height: 54px; padding-inline: 12px; gap: 10px; }
+  .folio-brand { font-size: 21px; }
+  .brand-symbol { width: 23px; height: 23px; }
+  .conversation-layout { flex-direction: column; }
+  .chat-history-rail { width: 100%; padding: 8px 12px; border-right: 0; border-bottom: 1px solid var(--border); }
+  .chat-history-rail .conversation-history { flex-direction: row; align-items: center; gap: 8px; }
+  .chat-history-rail .conversation-history select { flex: 1; width: 0; height: 30px; }
+  .history-caption { display: none; }
+  .conversation-view .conversation-title { padding: 8px 12px; min-height: 50px; }
+  .conversation-history label { font-size: 11px; }
+  .history-error { padding: 9px 12px; gap: 8px; }
+  .history-error > svg { display: none; }
+  .conversation-view .conversation, .conversation-view .is-empty .conversation { padding: 20px 14px 0; }
+  .conversation-view .chat-start h3 { font-size: 18px; }
+  .conversation-view .question-list { margin-top: 12px; gap: 6px; }
+  .conversation-view .question-list button { padding: 10px 8px; }
+  .conversation-view .composer-area { padding: 10px 14px; }
+  .conversation-view .composer textarea, .composer textarea { font-size: 16px; }
+  .conversation-view .enter-hint { display: none; }
+  .folio-body:not(.conversation-view) .conversation-dock { top: 62px; }
+  .mobile-chat-backdrop { top: 54px; }
+}
+
+.model-mode { margin-left: auto; }
+.model-mode select { min-height: 28px; max-width: 105px; padding: 4px 7px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface-soft); color: var(--text); font-size: 11px; }
+.answer-model { display: inline-block; color: var(--quiet-text); font-size: 10px; margin: 2px 0 4px; }
+@media (max-width: 700px) { .model-mode select { max-width: 92px; } }
