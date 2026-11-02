@@ -23,7 +23,7 @@
 
 .conversation-layout { display: flex; flex: 1; min-height: 0; min-width: 0; }
 .conversation-stage { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; }
-.chat-history-rail { width: 204px; flex: none; padding: 18px 12px; border-right: 1px solid var(--border); background: var(--surface-soft); }
+.chat-history-rail { width: 230px; flex: none; min-height: 0; overflow-y: auto; padding: 18px 12px; border-right: 1px solid var(--border); background: var(--surface-soft); }
 .chat-history-rail .conversation-history { flex-direction: column; align-items: stretch; gap: 10px; padding: 0; border: 0; background: transparent; }
 .chat-history-rail .conversation-history label { font-size: 12px; font-weight: 600; color: var(--text); }
 .chat-history-rail .conversation-history select { flex: none; width: 100%; height: 34px; font-size: 11px; }
@@ -102,3 +102,52 @@
 .model-mode select { min-height: 28px; max-width: 105px; padding: 4px 7px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface-soft); color: var(--text); font-size: 11px; }
 .answer-model { display: inline-block; color: var(--quiet-text); font-size: 10px; margin: 2px 0 4px; }
 @media (max-width: 700px) { .model-mode select { max-width: 92px; } }
+
+/* Chat organization shares Folio's typography and accent with the main workspace. */
+.chat-history-sidebar { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.history-new-chat { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px; background: transparent; color: var(--text); text-align: left; font: inherit; font-size: 12px; cursor: pointer; }
+.history-new-chat svg { width: 16px; height: 16px; }
+.history-new-chat:hover:not(:disabled) { background: var(--accent-soft); }
+.history-section { min-width: 0; }
+.history-section > summary, .history-section-heading { min-height: 30px; color: var(--muted-text); font-size: 11px; font-weight: 600; }
+.history-section > summary { cursor: pointer; padding: 5px 8px; }
+.history-section-heading { display: flex; align-items: center; justify-content: space-between; padding: 0 4px 0 8px; }
+.history-section-heading h3 { margin: 0; font: inherit; }
+.history-add-project { display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 5px; background: transparent; color: var(--muted-text); cursor: pointer; }
+.history-add-project svg { width: 14px; height: 14px; }
+.history-section ul, .history-project ul { margin: 4px 0 0; padding: 0; list-style: none; }
+.history-chat { position: relative; display: flex; align-items: center; min-width: 0; border-radius: 6px; }
+.history-chat.current { background: var(--accent-soft); }
+.history-chat:hover, .history-add-project:hover { background: var(--accent-soft); }
+.history-chat-link { flex: 1; min-width: 0; padding: 10px 8px; border: 0; background: transparent; color: var(--text); font: inherit; font-size: 11px; text-align: left; cursor: pointer; }
+.history-chat-link span { display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.history-chat-actions { flex: none; }
+.history-more { display: block; min-width: 28px; height: 30px; border: 0; border-radius: 4px; background: transparent; color: var(--muted-text); font-size: 18px; cursor: pointer; }
+.history-chat-menu { position: absolute; top: calc(100% - 2px); right: 0; z-index: 20; width: min(220px, 100%); padding: 6px; border: 1px solid var(--border-strong); border-radius: 6px; background: var(--surface); box-shadow: 0 8px 20px #0003; color: var(--text); }
+.history-chat-menu > button { display: block; width: 100%; padding: 8px; border: 0; border-radius: 4px; background: transparent; color: inherit; font: inherit; font-size: 11px; text-align: left; cursor: pointer; }
+.history-chat-menu > button:hover { background: var(--accent-soft); }
+.history-chat-menu label { display: block; padding: 8px; font-size: 11px; color: var(--muted-text); }
+.history-chat-menu select { display: block; width: 100%; margin-top: 6px; padding: 6px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; }
+.history-project > summary { display: flex; align-items: center; gap: 8px; padding: 9px 8px; border-radius: 5px; font-size: 12px; color: var(--text); cursor: pointer; }
+.history-project > summary:hover { background: var(--accent-soft); }
+.history-project > summary svg { width: 16px; height: 16px; flex: none; }
+.history-project > summary span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history-project[open] > summary { color: var(--text); font-weight: 600; }
+.history-project ul { margin-left: 12px; border-left: 1px solid var(--border); padding-left: 4px; }
+.history-empty { margin: 6px 8px; color: var(--quiet-text); font-size: 11px; line-height: 1.6; }
+.history-project-form { margin: 6px 0 10px; padding: 8px; border: 1px solid var(--border); border-radius: 6px; }
+.history-project-form label { display: block; margin-bottom: 6px; color: var(--muted-text); font-size: 11px; }
+.history-project-form input { width: 100%; min-width: 0; padding: 8px; border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface); color: var(--text); font: inherit; font-size: 12px; }
+.history-project-form > div { display: flex; gap: 8px; margin-top: 8px; }
+.history-project-form button { padding: 5px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--text); cursor: pointer; font: inherit; font-size: 11px; }
+.history-project-form button[type=submit] { background: var(--accent-soft); }
+.history-organization-error { padding: 8px; border: 1px solid var(--error-line); border-radius: 5px; color: var(--error-text); font-size: 11px; overflow-wrap: anywhere; }
+.history-organization-error p { margin: 0; }
+.history-reload { align-self: flex-start; font-size: 11px; color: var(--muted-text); }
+.chat-history-sidebar button:focus-visible, .chat-history-sidebar summary:focus-visible { outline: 2px solid var(--muted-text); outline-offset: 2px; }
+.chat-history-sidebar button:disabled { cursor: default; opacity: .5; }
+.folio-body:not(.conversation-view) .chat-history-rail { max-height: 220px; padding: 12px; }
+@media (max-width: 700px) {
+  .chat-history-rail { max-height: 220px; }
+  .chat-history-sidebar { gap: 12px; }
+}

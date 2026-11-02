@@ -67,7 +67,7 @@ export function ChatPanel({ busy, onBusy, messages, setMessages, onIndexed, onIn
     setMessages(previous => [...previous, { role: 'user', text, request_id: requestId }]); setQuestion('');
     try {
       const result = await api('/chat', { question: text, conversation_id: conversationId, request_id: requestId, model_mode: modelMode });
-      setMessages(previous => [...previous, { role: 'assistant', text: result.answer, sources: result.sources || [], token_usage: result.token_usage || [], routing: result.routing }]);
+      setMessages(previous => [...previous, { role: 'assistant', text: result.answer, answer_type: result.answer_type, sources: result.sources || [], token_usage: result.token_usage || [], routing: result.routing }]);
       onAnswerSources(result.sources || [], answerIndex);
     } catch (err) { setError(err.message); setQuestion(text); }
     finally { onSaved(); setThinking(false); onBusy(false); requestAnimationFrame(() => input.current?.focus()); }
@@ -89,7 +89,7 @@ export function ChatPanel({ busy, onBusy, messages, setMessages, onIndexed, onIn
       </div>}
       {messages.map((message, index) => <article ref={index === messages.length - 1 ? latest : null} className={`message ${message.role}`} key={index}>
         <div className="message-avatar" aria-hidden="true">{message.role === 'user' ? 'P' : <Icon name="sparkle" />}</div>
-        <div className="message-body"><div className="message-meta"><span className="message-author">{message.role === 'user' ? 'You' : 'Folio'}</span>{message.role === 'assistant' && <span className="answer-tag">From your library</span>}</div>{message.routing && <span className="answer-model" title={message.routing.reason}>{message.routing.model}{message.routing.initial_model ? " (retried)" : ""}</span>}<AnswerText text={message.text || ''} onCitation={id => onInspect(message.sources || [], index, id)} />
+        <div className="message-body"><div className="message-meta"><span className="message-author">{message.role === 'user' ? 'You' : 'Folio'}</span>{message.role === 'assistant' && <span className="answer-tag">{message.answer_type === 'app_help' ? 'Folio help' : 'From your library'}</span>}</div>{message.routing && <span className="answer-model" title={message.routing.reason}>{message.routing.model}{message.routing.initial_model ? " (retried)" : ""}</span>}<AnswerText text={message.text || ''} onCitation={id => onInspect(message.sources || [], index, id)} />
           {message.sources?.length > 0 && <button className="answer-sources" onClick={() => onInspect(message.sources, index)}><Icon name="file" /><span>{new Set(message.sources.map(source => source.source)).size} documents</span><span className="source-dots">·</span><span>{message.sources.length} excerpts</span><Icon name="arrow" /></button>}
         </div>
       </article>)}

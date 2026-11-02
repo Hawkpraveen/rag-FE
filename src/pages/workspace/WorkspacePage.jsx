@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LibraryDesk } from '../../features/library/LibraryDesk';
 import { ChatPanel } from '../../features/ask/ChatPanel';
 import { useConversations } from '../../features/ask/useConversations';
+import { ChatHistorySidebar } from '../../features/ask/ChatHistorySidebar';
 import { SourceCard } from '../../entities/source/SourceCard';
 import { api } from '../../shared/api/client';
 import { FolioMark, Icon } from '../../shared/ui/Icon';
@@ -65,7 +66,7 @@ export function WorkspacePage() {
     <header className="folio-topbar">
       <a className="folio-brand" href="/" aria-label="Folio home"><FolioMark /><span>folio.</span></a>
       <span className="workspace-name">Personal workspace</span>
-      <nav className="workspace-tabs" aria-label="Workspace views"><button className={view === 'library' ? 'current' : ''} aria-current={view === 'library' ? 'page' : undefined} onClick={() => setView('library')}><Icon name="folder" /> Library</button><button className={view === 'conversation' ? 'current' : ''} aria-current={view === 'conversation' ? 'page' : undefined} onClick={() => { setView('conversation'); setChatOpen(true); }}><Icon name="chat" /> Conversation{messages.length > 0 && <span className="tab-count">{Math.ceil(messages.length / 2)}</span>}</button></nav>
+      <nav className="workspace-tabs" aria-label="Workspace views"><button className={view === 'library' ? 'current' : ''} aria-current={view === 'library' ? 'page' : undefined} onClick={() => setView('library')}><Icon name="folder" /> Library</button><button className={view === 'conversation' ? 'current' : ''} aria-current={view === 'conversation' ? 'page' : undefined} onClick={() => { setView('conversation'); setChatOpen(true); }}><Icon name="chat" /> Conversation{history.conversations.length > 0 && <span className="tab-count" title="Saved conversations">{history.conversations.length}</span>}</button></nav>
       <div className="account-status"><span className={`connection-dot ${connection}`} /><span>{connection === 'online' ? 'Connected' : connection === 'checking' ? 'Connecting' : 'Agent offline'}</span><span className="profile-avatar" title="Personal workspace">P</span></div>
     </header>
     <div className={`folio-body${view === 'conversation' ? ' conversation-view' : ''}${showChat ? ' chat-open' : ''}`}>
@@ -76,15 +77,7 @@ export function WorkspacePage() {
       {view === 'library' && showChat && <button className="mobile-chat-backdrop" aria-label="Close conversation" onClick={() => setChatOpen(false)} />}
       <aside className="conversation-dock" aria-label="Library conversation" hidden={!showChat}>
         <div className="conversation-layout">
-        <div className="chat-history-rail">        <div className="conversation-history" aria-label="Saved conversations">
-          <label htmlFor="saved-conversation">Saved chats</label>
-          <select id="saved-conversation" value={history.conversationId || ''} disabled={busy} onChange={event => { history.load(event.target.value); setEvidence({ sources: [], index: null, selected: null }); setEvidenceOpen(false); }}>
-            {!history.conversations.some(item => item.conversation_id === history.conversationId) && <option value={history.conversationId || ''}>New conversation</option>}
-            {history.conversations.map(item => <option key={item.conversation_id} value={item.conversation_id}>{item.title}</option>)}
-          </select>
-          <button className="plain-button" disabled={busy} onClick={history.retry}>Reload</button>
-        </div>
-<p className="history-caption">Your conversations stay here so you can pick up where you left off.</p></div>
+        <div className="chat-history-rail"><ChatHistorySidebar history={history} busy={busy} onNewChat={newChat} onSelect={id => { history.load(id); setEvidence({ sources: [], index: null, selected: null }); setEvidenceOpen(false); }} /></div>
         <div className="conversation-stage">
         <header className="conversation-title"><div className="conversation-title-icon"><Icon name="chat" /></div><div><h2>{view === 'conversation' ? 'Conversation' : 'Ask your library'}</h2><p>{documentCount} {documentCount === 1 ? 'document' : 'documents'} connected</p></div><div className="conversation-controls"><button className={`conversation-action${evidenceOpen ? ' selected' : ''}`} aria-expanded={evidenceOpen} aria-controls="evidence-panel" onClick={() => setEvidenceOpen(value => !value)}><Icon name="panel" /><span>Sources</span>{evidence.sources.length > 0 && <span className="source-counter">{evidence.sources.length}</span>}</button><button className="conversation-action new-chat-action" aria-label="New conversation" title="New conversation" disabled={busy || !messages.length} onClick={newChat}><Icon name="plus" /><span>New chat</span></button>{view === 'library' && <button className="icon-button" aria-label="Close conversation" onClick={() => setChatOpen(false)}><Icon name="close" /></button>}</div></header>
         {history.error && <div className="history-error" role="alert"><Icon name="chat" /><div><strong>Saved chats are unavailable</strong><span>{history.error}</span></div><button className="plain-button" disabled={busy} onClick={history.retry}>Retry</button></div>}

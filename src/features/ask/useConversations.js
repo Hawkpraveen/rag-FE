@@ -7,7 +7,7 @@ function remembered() { try { return localStorage.getItem(storageKey); } catch {
 function toMessages(turns) {
   return turns.flatMap(turn => [
     { role: 'user', text: turn.question, request_id: turn.request_id },
-    { role: 'assistant', request_id: turn.request_id, sources: turn.sources || [], token_usage: turn.token_usage || [], routing: turn.routing,
+    { role: 'assistant', request_id: turn.request_id, answer_type: turn.answer_type, sources: turn.sources || [], token_usage: turn.token_usage || [], routing: turn.routing,
       text: turn.status === 'completed' ? turn.answer : turn.status === 'failed'
         ? `This question failed: ${turn.detail || 'The agent could not answer.'}`
         : 'No saved answer yet. Reload this conversation to check whether the question has finished.' },
